@@ -4,7 +4,12 @@ const cors = require('cors');
 const connectToDatabase = require('./db');
 const app = express();
 const dns = require('node:dns/promises');
+const path = require('path');
 
+app.use(express.static(path.join(__dirname, '.')));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 app.use(cors());
 app.use(express.json());
